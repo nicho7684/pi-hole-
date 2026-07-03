@@ -91,8 +91,22 @@ Visit the admin dashboard at:
 ```
 http://<host-ip>:8080/admin
 ```
-
+example-http://192.168.xx.x:8080/admin/
 ---
+**note**- to find the ip on any linux machine 
+```
+hostname -I
+```
+```
+ip addr show
+```
+
+example output
+```
+ wlan0: <BROADCAST,MULTICAST,UP>
+ inet 192.168.1.105/24
+```
+host ip: 192.168.1.105
 
 ##  Configuration
 
