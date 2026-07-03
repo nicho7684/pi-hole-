@@ -16,7 +16,7 @@ Network-wide ad blocking, DNS filtering, and a slick web dashboard — deployed 
 
 ##  Table of Contents
 
-- [Overview](#-overview)
+- [Overview](#-Overview)
 - [Features](#-features)
 - [Prerequisites](#-prerequisites)
 - [Installation](#-installation)
@@ -91,7 +91,7 @@ Visit the admin dashboard at:
 ```
 http://<host-ip>:8080/admin
 ```
-example-http://192.168.xx.x:8080/admin/
+example-`http://192.168.xx.x:8080/admin/`
 
 ---
 >**note**- to find the ip on any linux machine run
@@ -111,16 +111,18 @@ host ip: `192.168.1.105`
 
 ---
 
+
 ##  Using Pi-hole Across All Devices & Router
 
   Setting Pi-hole as Your DNS Server
-  
+
 **Option A — Whole network (recommended):** log into your router's admin panel and set the primary DNS server to `<host-ip>`. Every device on the network is now filtered automatically.
 
 >  Add a secondary/fallback DNS (like `1.1.1.1`) in your router settings so the network still resolves if the Pi-hole host goes down.
 
 
 **Option B — Per device:** point each device's DNS settings to `<host-ip>`.
+
 
 
 ## Option A - Setting Pi-hole on Router 
@@ -157,6 +159,7 @@ http://192.168.0.1
 Every device that connects to your WiFi now uses Pi-hole automatically. 
 
 ---
+
 
 ## Option B Set Pi-hole Per Device (Manual)
 
