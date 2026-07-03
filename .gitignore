@@ -1,0 +1,10 @@
+# Environment / secrets
+.env
+
+# Pi-hole runtime data (config, gravity DB, logs)
+etc-pihole/
+etc-dnsmasq.d/
+
+# OS / editor cruft
+.DS_Store
+*.swp
