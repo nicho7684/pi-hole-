@@ -14,6 +14,7 @@ Network-wide ad blocking, DNS filtering, and a slick web dashboard — deployed 
 <div align="center"> 
  <img src="assets/dashboard-screenshot.png" width="" height=""></div>
 </div>
+
 ---
 
 ##  Table of Contents
