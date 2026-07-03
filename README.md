@@ -75,7 +75,7 @@ cp .env.example .env
 
 **4. Launch the stack**
 
-**note**-before lunching the stack make sure docker is installed 
+>**note**-before lunching the stack make sure docker is installed 
 ```bash
 docker compose up -d
 ```
@@ -92,8 +92,9 @@ Visit the admin dashboard at:
 http://<host-ip>:8080/admin
 ```
 example-http://192.168.xx.x:8080/admin/
+
 ---
-**note**- to find the ip on any linux machine 
+>**note**- to find the ip on any linux machine run
 ```
 hostname -I
 ```
@@ -106,7 +107,124 @@ example output
  wlan0: <BROADCAST,MULTICAST,UP>
  inet 192.168.1.105/24
 ```
-host ip: 192.168.1.105
+host ip: `192.168.1.105`
+
+---
+
+##  Using Pi-hole Across All Devices & Router
+
+  Setting Pi-hole as Your DNS Server
+  
+**Option A — Whole network (recommended):** log into your router's admin panel and set the primary DNS server to `<host-ip>`. Every device on the network is now filtered automatically.
+
+>  Add a secondary/fallback DNS (like `1.1.1.1`) in your router settings so the network still resolves if the Pi-hole host goes down.
+
+
+**Option B — Per device:** point each device's DNS settings to `<host-ip>`.
+
+
+## Option A - Setting Pi-hole on Router 
+
+
+**1. Get your Pi-hole host IP:**
+```bash
+hostname -I
+```
+e.g. `192.168.1.105`
+
+**2. Log into your router admin panel:**
+```
+http://192.168.1.1
+```
+or
+```
+http://192.168.0.1
+```
+
+**3. Find DNS settings:**
+- Look under `WAN`, `Internet`, `DHCP`, or `DNS` settings
+- Set **Primary DNS** to your Pi-hole IP:
+```
+192.168.1.105
+```
+- Set **Secondary DNS** to a fallback (in case Pi-hole goes down):
+```
+1.1.1.1
+```
+
+**4. Save & reboot router**
+
+Every device that connects to your WiFi now uses Pi-hole automatically. 
+
+---
+
+## Option B Set Pi-hole Per Device (Manual)
+
+If you can't access router settings, set DNS manually on each device:
+
+**Linux:**
+```bash
+sudo nano /etc/resolv.conf
+```
+Add:
+```
+nameserver 192.168.1.105
+```
+
+Or with NetworkManager:
+```bash
+nmcli con mod "your-connection" ipv4.dns "192.168.1.105"
+nmcli con up "your-connection"
+```
+
+**Windows:**
+```
+Settings → Network → WiFi → DNS → Manual
+Primary DNS: 192.168.1.105
+```
+
+**Android:**
+```
+WiFi Settings → Hold your network → Modify
+IP Settings: Static
+DNS 1: 192.168.1.105
+```
+
+**iPhone:**
+```
+Settings → WiFi → tap (i) next to network
+Configure DNS → Manual → Add 192.168.1.105
+```
+
+---
+
+## Verify Pi-hole is Working
+
+On any device after setup, visit the dashbord:
+```
+http://192.168.1.105/admin
+```
+
+Check the dashboard — you should see DNS queries coming in from your devices.
+
+Or test from terminal:
+```bash
+nslookup google.com 192.168.1.105
+```
+
+---
+
+## ⚠️ Important
+
+| Thing | Why it matters |
+|---|---|
+| **Keep Pi-hole machine on 24/7** | If it goes down, internet breaks for all devices |
+| **Set a static IP for Pi-hole host** | So the IP never changes |
+| **Always set a fallback DNS** | `1.1.1.1` as secondary keeps internet working if Pi-hole crashes |
+
+---
+
+Want help setting a static IP on your Arch machine so Pi-hole always stays at the same address?
 
 ##  Configuration
 
@@ -166,15 +284,6 @@ PIHOLE_PASSWORD=changeme
 
 ---
 
-##  Setting Pi-hole as Your DNS Server
-
-**Option A — Per device:** point each device's DNS settings to `<host-ip>`.
-
-**Option B — Whole network (recommended):** log into your router's admin panel and set the primary DNS server to `<host-ip>`. Every device on the network is now filtered automatically.
-
->  Add a secondary/fallback DNS (like `1.1.1.1`) in your router settings so the network still resolves if the Pi-hole host goes down.
-
----
 
 ##  Updating
 
