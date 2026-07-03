@@ -1,4 +1,4 @@
-# 🕳️ Pi-hole Docker Deployment
+# Pi-hole Docker Deployment
 
 <div align="center">
 
@@ -12,7 +12,7 @@ Network-wide ad blocking, DNS filtering, and a slick web dashboard — deployed 
 
 ---
 
-## 📖 Table of Contents
+##  Table of Contents
 
 - [Overview](#-overview)
 - [Features](#-features)
@@ -29,23 +29,23 @@ Network-wide ad blocking, DNS filtering, and a slick web dashboard — deployed 
 
 ---
 
-## 🔎 Overview
+##  Overview
 
 This repo spins up [Pi-hole](https://pi-hole.net/) as a Docker container using Docker Compose. Pi-hole acts as a DNS sinkhole that blocks ads and trackers network-wide — no per-device browser extensions needed.
 
 ---
 
-## ✨ Features
+##  Features
 
-- 🚫 Network-wide ad and tracker blocking via DNS
-- 📊 Web dashboard for stats, query logs, and block-list management
-- 🔧 Fully configurable via environment variables
-- 💾 Persistent storage for config and logs (survives container restarts/updates)
-- 🐳 One-command deploy and update via Docker Compose
+-  Network-wide ad and tracker blocking via DNS
+-  Web dashboard for stats, query logs, and block-list management
+-  Fully configurable via environment variables
+-  Persistent storage for config and logs (survives container restarts/updates)
+-  One-command deploy and update via Docker Compose
 
 ---
 
-## ✅ Prerequisites
+##  Prerequisites
 
 - A Linux host (bare metal, VM, or homelab server) — Raspberry Pi works great
 - [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) installed
@@ -54,7 +54,7 @@ This repo spins up [Pi-hole](https://pi-hole.net/) as a Docker container using D
 
 ---
 
-## 🚀 Installation
+##  Installation
 
 **1. Clone the repo**
 
@@ -91,7 +91,7 @@ http://<host-ip>:8080/admin
 
 ---
 
-## ⚙️ Configuration
+##  Configuration
 
 ### `docker-compose.yml`
 
@@ -132,11 +132,11 @@ PIHOLE_PASSWORD=changeme
 | `TZ`               | Timezone for logs and dashboard      | UTC     |
 | `PIHOLE_PASSWORD`  | Web admin login password             | random  |
 
-> 🔐 **Never commit your real `.env` file.** Keep only `.env.example` in version control — add `.env` to `.gitignore`.
+>  **Never commit your real `.env` file.** Keep only `.env.example` in version control — add `.env` to `.gitignore`.
 
 ---
 
-## 🖥️ Usage
+##  Usage
 
 | Task                        | Command                                      |
 |------------------------------|-----------------------------------------------|
@@ -149,17 +149,17 @@ PIHOLE_PASSWORD=changeme
 
 ---
 
-## 🌐 Setting Pi-hole as Your DNS Server
+##  Setting Pi-hole as Your DNS Server
 
 **Option A — Per device:** point each device's DNS settings to `<host-ip>`.
 
 **Option B — Whole network (recommended):** log into your router's admin panel and set the primary DNS server to `<host-ip>`. Every device on the network is now filtered automatically.
 
-> 💡 Add a secondary/fallback DNS (like `1.1.1.1`) in your router settings so the network still resolves if the Pi-hole host goes down.
+>  Add a secondary/fallback DNS (like `1.1.1.1`) in your router settings so the network still resolves if the Pi-hole host goes down.
 
 ---
 
-## 🔄 Updating
+##  Updating
 
 Pi-hole's Docker image handles its own internal updates. To pull the latest image:
 
@@ -170,7 +170,7 @@ docker compose up -d
 
 ---
 
-## 💾 Backup & Restore
+##  Backup & Restore
 
 Pi-hole has a built-in Teleporter export for full config backups.
 
@@ -186,7 +186,7 @@ Since `./etc-pihole` and `./etc-dnsmasq.d` are bind-mounted, you can also just b
 
 ---
 
-## 🛠️ Troubleshooting
+##  Troubleshooting
 
 **Port 53 already in use**
 Something else on the host is listening on DNS (commonly `systemd-resolved`):
@@ -209,7 +209,7 @@ Then edit `/etc/resolv.conf` to point to a public resolver temporarily, and rest
 
 ---
 
-## 🗑️ Uninstalling
+##  Uninstalling
 
 ```bash
 docker compose down -v
@@ -220,6 +220,6 @@ Then revert your router/device DNS settings back to their original values.
 
 ---
 
-## 📄 License
+##  License
 
 Licensed under the [MIT License](LICENSE).
